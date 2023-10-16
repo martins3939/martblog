@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/img.png')}}" type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MARTBLOG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{url_for('home')}}"><span class="fa fa-home"></span> Home</a></li>
+                    <li><a href="{{url_for('category', cat='tech')}}"></span>Tech</a></li>
+                    <li><a href="{{url_for('category', cat='crypto')}}"></span>Crypto</a></li>
+                    <li><a href="{{url_for('category', cat='coding')}}"></span>Coding</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron text-center">
+        <h1>Register with us</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <form method='POST' action="{{url_for('register')}}">
+                    <div class="form-group">
+                        <label>USERNAME:</label>
+                        <input type="text" name="username" placeholder="Userame" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL:</label>
+                        <input type="text" name="email" placeholder="Email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>PASSWORD:</label>
+                        <input type="password" name="password" placeholder="Password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Register</button>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    <center><span class="log"><a href="{{url_for('login')}}">already have an account?</a></span></center>
+    
+
+    <nav class="navbar-wrapper navbar-fixed-bottom footer">
+        <div class="container-fluid">
+            <p class="navbar-text pull-left">&copy; 2022 by MARTBLOG. All rights reserved.</p>
+        </div>
+    </nav>
+    <script src="{{url_for('static', filename='javascript/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='javascript/bootstrap.min.js')}}"></script>
+</body>
+</html>

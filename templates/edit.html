@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writer</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/img.png')}}" type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MARTBLOG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{url_for('home')}}"><span class="fa fa-home"></span> Home</a></li>
+                    <li><a href="{{url_for('category', cat='tech')}}"></span>Tech</a></li>
+                    <li><a href="{{url_for('category', cat='crypto')}}"></span>Crypto</a></li>
+                    <li><a href="{{url_for('category', cat='coding')}}"></span>Coding</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron text-center">
+        <h1>Editing {{fetchnews.title}}</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <form method='POST' action="{{url_for('edit',title=fetchnews.title)}}">
+                    <input type="text"name="name" placeholder="Author Name" value="{{fetchnews.username}}" hidden>
+                    <div class="form-group">
+                    <label>Date:</label>
+                    <input type="date" name="date" class="form-control" value="{{fetchnews.date}}" required>
+                    </div>
+                    <div class="form-group">
+                    <label>Category:</label>
+                    <select name="category" class="form-control" required>
+                        <option value="tech">Technology</option>
+                        <option value="crypto">Crypto</option>
+                        <option value="coding">Coding</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" name="title" placeholder="Blog Title" class="form-control" value="{{fetchnews.title}}" required>
+                    </div>
+                    <div class="form-group">
+                    <label>News:</label>
+                    <textarea name="news" placeholder="Any fake news or news to promote any illegal thing will be deleted" class="form-control" required>{{fetchnews.news}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    <nav class="navbar-wrapper footer">
+        <div class="container-fluid">
+            <p class="navbar-text pull-left">&copy; 2022 by MARTBLOG. All rights reserved.</p>
+        </div>
+    </nav>
+    <script src="{{url_for('static', filename='javascript/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='javascript/bootstrap.min.js')}}"></script>
+</body>
+</html>

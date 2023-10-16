@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile | {{fetchuser.username}}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/img.png')}}" type="image/x-icon">
+</head>
+<body>
+    <!--Navbar starts-->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MARTBLOG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{url_for('home')}}"><span class="fa fa-home"></span> Home</a></li>
+                    <li><a href="{{url_for('category', cat='tech')}}"></span>Tech</a></li>
+                    <li><a href="{{url_for('category', cat='crypto')}}"></span>Crypto</a></li>
+                    <li><a href="{{url_for('category', cat='coding')}}"></span>Coding</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Navbar ends-->
+    <div class="container">
+    <p>
+    Username : {{fetchuser.username}}<br>
+    Email : {{fetchuser.email}}
+    </p>
+    <h3>{{msg}}</h3>
+    <h2>Change username</h2>
+    <form method='POST' action="{{url_for('profile',user=fetchuser.username)}}">
+        <div class="form-group">
+            <label>Enter new username: </label>
+            <input type="text" name="username" class="form-control" required><br>
+            <input type="submit" value="change">
+        </div>
+    </form>
+    <h2>Change password</h2>
+    <form method='POST' action="{{url_for('changepass',user=fetchuser.username)}}">
+        <div class="form-group">
+            <label>Enter old password: </label>
+            <input type="password" name="oldpass" class="form-control" required>
+            <label>Enter new password: </label>
+            <input type="password" name="newpass1" class="form-control" required>
+            <label>Enter new password again: </label>
+            <input type="password" name="newpass2" class="form-control" required><br>
+            <input type="submit" value="change">
+        </div>
+    </form>
+    </div>
+    <!--footer ends-->
+    <nav class="navbar-wrapper navbar-fixed-bottom footer">
+        <div class="container-fluid">
+            <p class="navbar-text pull-left">&copy; 2022 by MARTBLOG. All rights reserved.</p>
+        </div>
+    </nav>
+    <!--footer ends-->
+    <script src="{{url_for('static', filename='javascript/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='javascript/bootstrap.min.js')}}"></script>
+</body>
+</html>

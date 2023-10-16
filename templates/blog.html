@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martblog</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/img.png')}}" type="image/x-icon">
+    <script src="{{url_for('static', filename='javascript/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='javascript/bootstrap.min.js')}}"></script>
+</head>
+<body>
+    <!--Navbar start-->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MARTBLOG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="{{url_for('home')}}"><span class="fa fa-home"></span> Home</a></li>
+                  <li><a href="{{url_for('register')}}"><span class="fa fa-user"></span> Sign Up</a></li>
+                  <li><a href="{{url_for('login')}}"><span class="fa fa-sign-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Navbar end-->
+    
+    <div class="container-fluid cat">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="jumbotron text-center">
+                    <h1>Mart blog</h1>
+                    <p>....Where news thrive.</p>
+                </div>
+                {% for items in fetchnews|reverse %}
+                <a href="{{url_for('read', title=items.title)}}">
+                    <h1>{{items.title}}</h1>
+                    <span>{{items.name}}</span> <span>{{items.date}}</span><br><br>
+                    <p style="font-size:20px;">{{items.news[:150]}}......READ MORE</p>
+                </a>
+                <hr>
+                {% endfor %}
+            </div>
+            <div class="col-sm-3">
+                <div class="catmaster">
+                <p class="head">CATEGORY</p>
+                </div>
+                <div>
+                    <a href="{{url_for('category', cat='tech')}}" class="list-group-item">Technology</a></li>
+                    <a href="{{url_for('category', cat='crypto')}}" class="list-group-item">Crypto</a></li>
+                    <a href="{{url_for('category', cat='coding')}}" class="list-group-item">Coding</a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar-wrapper footer">
+        <div class="container-fluid">
+            <p class="navbar-text pull-left">&copy; 2022 by MARTBLOG. All rights reserved.</p>
+        </div>
+    </nav>
+</body>
+</html>

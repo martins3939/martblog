@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{fetchnews.title}}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/img.png')}}" type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MARTBLOG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="{{url_for('home')}}"><span class="fa fa-home"></span> Home</a></li>
+                  <li><a href="{{url_for('register')}}"><span class="fa fa-user"></span> Sign Up</a></li>
+                  <li><a href="{{url_for('login')}}"><span class="fa fa-sign-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid cat">
+        <div class="row">
+            <div class="col-sm-9 read">
+                <h1>{{fetchnews.title}}</h1>
+                <span>{{fetchnews.name}}</span> <span>{{fetchnews.date}}</span><br><br>
+                <p>share:</p>
+                <p style="font-size:20px;">{{fetchnews.news}}</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="head">CATEGORY</p>
+                <div>
+                    <a href="{{url_for('category', cat='tech')}}" class="list-group-item">Technology</a></li>
+                    <a href="{{url_for('category', cat='crypto')}}" class="list-group-item">Crypto</a></li>
+                    <a href="{{url_for('category', cat='coding')}}" class="list-group-item">Coding</a></li>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="container-fluid readmore">
+        <h1 class="head2">CONTINUE READING</h1>
+        <div class="row">
+            {% for items in fetchnews2[1:4]|reverse %}
+            <div class="col-sm-4">
+            <a href="{{url_for('read', title=items.title)}}">
+                <h3>{{items.title}}</h1>
+                <span>{{items.name}}</span> <span>{{items.date}}</span><br><br>
+                <p style="font-size:14px;">{{items.news[:50]}}......READ MORE</p>
+            </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container-fluid">
+    <div class="form-group">
+        <h2 class="comments-head">Comments</h2>
+        {% for items in fetchcomment|reverse %}
+            <h2>{{items.commname}}</h2>
+            <p>{{items.comment}}</p>
+        {% endfor %}
+        <form method='POST' action="{{url_for('read',title=fetchnews.title)}}">
+            <input type="text" name="link" value="{{fetchnews.title}}" hidden>
+            
+            <label>Name</label>
+            <input type="text" class="form-control" name="commname">
+
+            <label>Comments</label>
+            <textarea name="comment" class="form-control" ></textarea>
+            <input type="submit">
+        </form>
+    </div>
+    </div>
+    <nav class="navbar-wrapper footer">
+        <div class="container-fluid">
+            <p class="navbar-text pull-left">&copy; 2022 by MARTBLOG. All rights reserved.</p>
+        </div>
+    </nav>
+    <script src="{{url_for('static', filename='javascript/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='javascript/bootstrap.min.js')}}"></script>
+</body>
+</html>

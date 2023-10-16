@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | {{fetchuser.username}}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/img.png')}}" type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MARTBLOG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{url_for('home')}}"><span class="fa fa-home"></span> Home</a></li>
+                    <li><a href="{{url_for('category', cat='tech')}}"></span>Tech</a></li>
+                    <li><a href="{{url_for('category', cat='crypto')}}"></span>Crypto</a></li>
+                    <li><a href="{{url_for('category', cat='coding')}}"></span>Coding</a></li>
+                    <li><a href="{{url_for('profile', user=fetchuser.username )}}"><span class="fa fa-user"></span> Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid"><h1>Welcome {{fetchuser.username}}</h1></div>
+    <div class="container-fluid">
+    <span class="addpost"><a href="{{url_for('add',name=fetchuser.username)}}">ADD NEW POST</a></span>
+    </div>
+    <div class="container-fluid">
+        {% if fetchnews %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date</td>
+                    <th>Category</td>
+                    <th>Title</td>
+                    <th>Edit</td>
+                    <th>Delete</td>
+                </tr>
+                </thead>
+                {% for item in fetchnews %}
+                <tbody>
+                <tr>
+                    <td>{{item.date}}</td>
+                    <td>{{item.category}}</td>
+                    <td>{{item.title}}</td>
+                    <td><a href="{{url_for('edit', title=item.title)}}">Edit</a></td>
+                    <td><a href="{{url_for('delete', id=item.id)}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h3>You have not created an article yet <a href="{{url_for('add',name=fetchuser.username)}}">Create an article</a></h3>
+        {% endif %}
+    </div>
+    <nav class="navbar-wrapper navbar-fixed-bottom footer">
+        <div class="container-fluid">
+            <p class="navbar-text pull-left">&copy; 2022 by MARTBLOG. All rights reserved.</p>
+        </div>
+    </nav>
+    <script src="{{url_for('static', filename='javascript/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='javascript/bootstrap.min.js')}}"></script>
+</body>
+</html>
