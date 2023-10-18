@@ -4,17 +4,20 @@ import os
 import random
 import string
 from flask_mail import Mail, Message
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+
+load_dotenv()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///note.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #------flask mail start---------
-app.config['MAIL_SERVER']=''
-app.config['MAIL_PORT'] = 
-app.config['MAIL_USERNAME'] = ''
-app.config['MAIL_PASSWORD'] = ''
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 #-------flask mail end---------
@@ -155,7 +158,7 @@ def recover():
             return render_template('recover.html', error = "Email not Founds")
 
         if email == emails.email:
-            msg = Message(sender = ('Martins from Martblog',''), recipients=[email])
+            msg = Message(sender = ('Martins from Martblog', os.getenv('MAIL_USERNAME')), recipients=[email])
             msg.subject = 'Martblog Password Reset'
             msg.body = '''Hey %s, it seems that you forgot your password.
 
