@@ -1,3 +1,4 @@
 note.db
 myenv/
 .env
+*cache*
