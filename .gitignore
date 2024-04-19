@@ -1,4 +1,5 @@
 note.db
-myenv/
+venv/
 .env
 *cache*
+.vscode/
